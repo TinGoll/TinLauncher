@@ -2,5 +2,13 @@
 
 interface Window {
   // expose in the `electron/preload/index.ts`
-  ipcRenderer: import('electron').IpcRenderer
+  ipcRenderer: import("electron").IpcRenderer;
+  electronAPI: {
+    launchMinecraft: (options: TinLauncher.LaucherArgs) => Promise<void>;
+    getServerStatus: (
+      options: TinLauncher.ServerStatusArgs
+    ) => Promise<TinLauncher.ServerStatusReturn | null>;
+    winHidden: () => Promise<void>;
+    winShow: () => Promise<void>;
+  };
 }

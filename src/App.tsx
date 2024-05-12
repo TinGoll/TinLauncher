@@ -1,13 +1,46 @@
-import { FC, useState } from 'react'
-import UpdateElectron from '@/components/update'
-import logoVite from './assets/logo-vite.svg'
-import logoElectron from './assets/logo-electron.svg'
-import './App.css'
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { FC, useEffect } from "react";
+import { Layout } from "./components/Layout";
+import { ScreenSwitch } from "./components/ScreenSwitch";
+import { setLoading } from "./stores/loading.store";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 export const App: FC = () => {
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    const handleStart = () => {
+
+      timeoutId = setTimeout(() => {
+        setLoading(false);
+        window.electronAPI.winHidden();
+      }, 20000);
+
+    };
+
+    const handleClose = () => {
+      setLoading(false);
+      window.electronAPI.winShow();
+    };
+
+    window.ipcRenderer.on("minecraft-start", handleStart);
+    window.ipcRenderer.on("minecraft-close", handleClose);
+    () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
-    <div>
-      Привет
-    </div>
-  )
-}
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Layout>
+        <ScreenSwitch />
+      </Layout>
+    </ThemeProvider>
+  );
+};
