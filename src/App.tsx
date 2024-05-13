@@ -3,6 +3,11 @@ import { FC, useEffect } from "react";
 import { Layout } from "./components/Layout";
 import { ScreenSwitch } from "./components/ScreenSwitch";
 import { setLoading } from "./stores/loading.store";
+import {
+  setCurrentVersion,
+  useCurrentVersion,
+} from "./stores/version-control.store";
+import { serverNames } from "../launcher/servers";
 
 const darkTheme = createTheme({
   palette: {
@@ -11,18 +16,31 @@ const darkTheme = createTheme({
 });
 
 export const App: FC = () => {
+  
+  const previusVersion = useCurrentVersion();
+  useEffect(() => {
+    const fetchCurrentVersion = async () => {
+      const currentVerion = window.electronAPI.getConfig("npm_package_version");
+      if (currentVerion && previusVersion !== currentVerion) {
+        setCurrentVersion(currentVerion);
+        for (const serverName of serverNames) {
+          console.log("Мочим", serverName);
+          window.electronAPI.removeClientFolder(serverName);
+        }
+      }
+    };
+
+    fetchCurrentVersion();
+  }, [previusVersion]);
+
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
-
     const handleStart = () => {
-
       timeoutId = setTimeout(() => {
         setLoading(false);
         window.electronAPI.winHidden();
-      }, 20000);
-
+      }, 30000);
     };
-
     const handleClose = () => {
       setLoading(false);
       window.electronAPI.winShow();

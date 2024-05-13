@@ -1,6 +1,9 @@
 import { BrowserWindow } from "electron";
 import MLC, { ILauncherOptions } from "minecraft-launcher-core";
 import { classicOptions, industrialOptions } from "./options";
+import path from "path";
+import { DEV_FOLDER_NAME, PROD_FOLDER_NAME } from "./constants";
+import { getClientFolderPath, isExistsFolder } from "./utils";
 
 const minecraftLauncher = async (
   win: BrowserWindow | null,
@@ -9,14 +12,26 @@ const minecraftLauncher = async (
   const { Client, Authenticator } = MLC;
   const launcher = new Client();
 
+  // const launcherVersion = process.env.npm_package_version;
+  const PATH = getClientFolderPath(serverType);
+
   const defaultOptions =
     serverType === "industrial" ? industrialOptions : classicOptions;
 
+  const isFolderExists = isExistsFolder(PATH);
+  const clientPackage = isFolderExists
+    ? {}
+    : { clientPackage: `./package/${serverType}/${serverType}.zip` };
+
   let opts: ILauncherOptions = {
+    root: PATH,
     authorization: Authenticator.getAuth(nickname),
     ...defaultOptions,
+    ...clientPackage,
     ...options,
   };
+
+  // События
 
   launcher.on("progress", (e) =>
     win?.webContents.send("minecraft-progress", e)

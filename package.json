@@ -1,6 +1,6 @@
 {
-  "name": "tin-launcher",
-  "version": "1.0.0",
+  "name": "Tin Launcher",
+  "version": "1.0.6",
   "main": "dist-electron/main/index.js",
   "description": "Minecraft Launcher",
   "author": "TinGol <roma.oliynyk83@gmail.com>",
@@ -14,7 +14,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "npm version patch && tsc && vite build && electron-builder",
     "preview": "vite preview",
     "pree2e": "vite build --mode=test",
     "e2e": "playwright test"

@@ -1,4 +1,5 @@
 import { ipcRenderer, contextBridge } from "electron";
+import { removeClientFolder } from "../../launcher/utils";
 
 // --------- Предоставить некоторый API процессу рендеринга ---------
 contextBridge.exposeInMainWorld("ipcRenderer", {
@@ -32,6 +33,11 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
   winHidden: () => ipcRenderer.invoke("win-hidden"),
   winShow: () => ipcRenderer.invoke("win-show"),
+  getConfig: (value: string): string | null => {
+    return process?.env[value] || null;
+  },
+  removeClientFolder: (serverName: TinLauncher.ServerType) =>
+    removeClientFolder(serverName),
 });
 
 // --------- Preload scripts loading ---------

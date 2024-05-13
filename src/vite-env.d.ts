@@ -10,5 +10,7 @@ interface Window {
     ) => Promise<TinLauncher.ServerStatusReturn | null>;
     winHidden: () => Promise<void>;
     winShow: () => Promise<void>;
+    getConfig: (value: string) => string | null;
+    removeClientFolder: (path: string) => boolean;
   };
 }

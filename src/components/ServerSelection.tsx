@@ -11,6 +11,7 @@ import { localisation } from "@/localisation";
 import { PiCherriesFill } from "react-icons/pi";
 import { US, RU } from "country-flag-icons/react/3x2";
 import { setLoading } from "@/stores/loading.store";
+import { serverNames } from "../../launcher/servers";
 
 const Container = styled("div")`
   & .servers {
@@ -72,7 +73,6 @@ const Container = styled("div")`
   }
 `;
 
-const servers: TinLauncher.ServerType[] = ["classic", "industrial"];
 export const ServerSelection: FC = () => {
   const language = useLanguage();
   const nickname = useCurrentNickname();
@@ -124,8 +124,12 @@ export const ServerSelection: FC = () => {
         </div>
       </div>
       <div className="servers">
-        {servers.map((server) => (
-          <SeverBlock key={server} server={server} onLaunch={handleLaunch} />
+        {serverNames.map((serverName) => (
+          <SeverBlock
+            key={serverName}
+            server={serverName}
+            onLaunch={handleLaunch}
+          />
         ))}
       </div>
     </Container>
