@@ -138,10 +138,29 @@ export const LoadingScreen: FC = () => {
       console.log("handleExtract", args);
     };
 
+    const mode = window.electronAPI.getConfig("NODE_ENV");
+    console.log("mode>>", mode);
+
+    const handleDebug = (_: IpcRendererEvent, ...args: [Proggress, ...any]) => {
+      console.log("DEBUG", args);
+    };
+    const handleError = (_: IpcRendererEvent, ...args: [Proggress, ...any]) => {
+      console.log("ERROR", args);
+    };
+
+    const handleOptions = (
+      _: IpcRendererEvent,
+      ...args: [Proggress, ...any]
+    ) => {
+      console.log("OPTIONS", args);
+    };
+
     window.ipcRenderer.on("minecraft-progress", handleProgress);
-    window.ipcRenderer.on("minecraft-debug", (e) => console.log(e));
+    window.ipcRenderer.on("minecraft-debug", handleDebug);
+    window.ipcRenderer.on("minecraft-error", handleError);
     window.ipcRenderer.on("minecraft-download-status", handleDownload);
     window.ipcRenderer.on("minecraft-package-extract", handleExtract);
+    window.ipcRenderer.on("minecraft-options", handleOptions);
   }, []);
 
   return (

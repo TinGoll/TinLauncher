@@ -33,6 +33,8 @@ const minecraftLauncher = async (
 
   // События
 
+  win?.webContents.send("minecraft-options", opts);
+
   launcher.on("progress", (e) =>
     win?.webContents.send("minecraft-progress", e)
   );
@@ -49,9 +51,10 @@ const minecraftLauncher = async (
   );
   launcher.on("debug", (e) => win?.webContents.send("minecraft-debug", e));
 
-  return launcher
+  launcher
     .launch(opts)
-    .then(() => win?.webContents.send("minecraft-start", "start"));
+    .then(() => win?.webContents.send("minecraft-start", "start"))
+    .catch((err) => win?.webContents.send("minecraft-error", "start"));
 };
 
 export default minecraftLauncher;
