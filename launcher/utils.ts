@@ -18,6 +18,19 @@ export const removeFolder = (path: string): boolean => {
   }
 };
 
+export const createFolder = (path: string): boolean => {
+  try {
+    if (!isExistsFolder(path)) {
+      fs.mkdirSync(path);
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    return false;
+  }
+};
+
 export const getClientFolderPath = (srverName: TinLauncher.ServerType) => {
   const APP_DATA_PATH = process.env.APPDATA || "";
 

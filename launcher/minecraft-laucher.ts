@@ -3,7 +3,7 @@ import MLC, { ILauncherOptions } from "minecraft-launcher-core";
 import { classicOptions, industrialOptions } from "./options";
 import path from "path";
 import { DEV_FOLDER_NAME, PROD_FOLDER_NAME } from "./constants";
-import { getClientFolderPath, isExistsFolder } from "./utils";
+import { createFolder, getClientFolderPath, isExistsFolder } from "./utils";
 
 const minecraftLauncher = async (
   win: BrowserWindow | null,
@@ -30,6 +30,11 @@ const minecraftLauncher = async (
     ...clientPackage,
     ...options,
   };
+
+  const isFolderCreated = createFolder(PATH);
+  if (isFolderCreated) {
+    win?.webContents.send("minecraft-debug", { isFolderCreated });
+  }
 
   // События
 
