@@ -1,7 +1,12 @@
 import { BrowserWindow } from "electron";
 import MLC, { ILauncherOptions } from "minecraft-launcher-core";
 import { classicOptions, industrialOptions } from "./options";
-import { createFolder, getClientFolderPath, isExistsFolder, readFolder } from "./utils";
+import {
+  createFolder,
+  getClientFolderPath,
+  isExistsFolder,
+  readFolder,
+} from "./utils";
 import path from "path";
 
 const minecraftLauncher = async (
@@ -42,7 +47,9 @@ const minecraftLauncher = async (
     win?.webContents.send("minecraft-debug", { isFolderCreated, opts });
   }
 
-  readFolder(VITE_PUBLIC).then((files) => win?.webContents.send("minecraft-files", files))
+  readFolder(path.join(VITE_PUBLIC, "package")).then((files) =>
+    win?.webContents.send("minecraft-files", files)
+  );
 
   // События
 
