@@ -1,5 +1,5 @@
 {
-  "name": "Tin Launcher",
+  "name": "tinlauncher",
   "version": "1.0.7",
   "main": "dist-electron/main/index.js",
   "description": "Minecraft Launcher",
