@@ -6,7 +6,10 @@ import os from "node:os";
 import { update } from "./update";
 import minecraftLauncher from "../../src/launcher/minecraft-laucher";
 import getStatusServer from "../../src/launcher/getStatusServer";
-import { installingFolders } from "../../src/launcher/utils";
+import {
+  installingFolders,
+  removeFolderInAppDataDirectory,
+} from "../../src/launcher/utils";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -152,4 +155,8 @@ ipcMain.handle("win-show", async () => win?.show());
 
 ipcMain.handle("installing-folders", async () => {
   return installingFolders();
+});
+
+ipcMain.handle("remove-folder", async (_, args: { folderName: string }) => {
+  return removeFolderInAppDataDirectory(args.folderName);
 });

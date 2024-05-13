@@ -42,7 +42,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
   removeClientFolder: (serverName: TinLauncher.ServerType) =>
     removeClientFolder(serverName),
   removeFolderInAppDataDirectory: (folderName: string) =>
-    removeFolderInAppDataDirectory(folderName),
+    ipcRenderer.invoke("remove-folder", { folderName }),
   installingFolders: () => ipcRenderer.invoke("installing-folders"),
 });
 
