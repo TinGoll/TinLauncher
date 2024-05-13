@@ -19,8 +19,11 @@ export const App: FC = () => {
   const previusVersion = useCurrentVersion();
 
   useEffect(() => {
+    console.log("previusVersion", previusVersion);
+
     const fetchCurrentVersion = async () => {
       const currentVerion = window.electronAPI.getConfig("npm_package_version");
+      console.log(currentVerion, previusVersion);
       if (currentVerion && previusVersion !== currentVerion) {
         setCurrentVersion(currentVerion);
         for (const serverName of serverNames) {
