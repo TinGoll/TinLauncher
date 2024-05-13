@@ -2,12 +2,10 @@ import { BrowserWindow } from "electron";
 import MLC, { ILauncherOptions } from "minecraft-launcher-core";
 import { classicOptions, industrialOptions } from "./options";
 import {
-  copyFolderRecursive,
   createFolder,
   getClientFolderPath,
   getDataPath,
   isExistsFolder,
-  readFolder,
 } from "./utils";
 import path from "path";
 
@@ -18,18 +16,16 @@ const minecraftLauncher = async (
   const { Client, Authenticator } = MLC;
   const launcher = new Client();
 
-  // const launcherVersion = process.env.npm_package_version;
   const PATH = getClientFolderPath(serverType);
-  const VITE_PUBLIC = process.env.VITE_PUBLIC;
-  const PACKAGE_PATH = path.join(VITE_PUBLIC, "package");
+
+  const PACKAGE_PATH = path.join(getDataPath(), "package");
 
   const defaultOptions =
     serverType === "industrial"
       ? {
           ...industrialOptions,
           forge: path.join(
-            VITE_PUBLIC,
-            "package",
+            PACKAGE_PATH,
             "industrial",
             "forge",
             "forge-1.19.2-43.3.8-installer.jar"
@@ -40,10 +36,9 @@ const minecraftLauncher = async (
   const isFolderExists = isExistsFolder(PATH);
   const isCreated = createFolder(PATH);
 
-  // copyFolderRecursive(path.join(VITE_PUBLIC, "package"), getDataPath());
-
-  const clientPackage = isFolderExists ? {} : {};
-  //clientPackage: `${PACKAGE_PATH}/${serverType}/${serverType}.zip`
+  const clientPackage = isFolderExists
+    ? {}
+    : { clientPackage: `${PACKAGE_PATH}/${serverType}/${serverType}.zip` };
 
   let opts: ILauncherOptions = {
     root: PATH,
@@ -53,11 +48,9 @@ const minecraftLauncher = async (
     ...options,
   };
 
-  win?.webContents.send("minecraft-options", JSON.stringify(opts));
-
-  readFolder(path.join(VITE_PUBLIC, "package", "industrial", "forge")).then(
-    (files) => win?.webContents.send("minecraft-files", files)
-  );
+  // readFolder(path.join(VITE_PUBLIC, "package", "industrial", "forge")).then(
+  //   (files) => win?.webContents.send("minecraft-files", files)
+  // );
 
   // События
 

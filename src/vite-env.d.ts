@@ -13,5 +13,6 @@ interface Window {
     getConfig: (value: string) => string | null;
     removeClientFolder: (path: string) => boolean;
     removeFolderInAppDataDirectory: (path: string) => boolean;
+    installingFolders: () => void;
   };
 }

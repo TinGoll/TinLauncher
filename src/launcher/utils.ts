@@ -69,8 +69,6 @@ export const removeClientFolder = (
 export const removeFolderInAppDataDirectory = (folderName: string) => {
   const PATH = getDataPath();
   const folderPath = path.join(PATH, folderName);
-  console.log("folderPath>>>", folderPath);
-  
   return removeFolder(folderPath);
 };
 
@@ -108,4 +106,12 @@ export const copyFolderRecursive = (source: string, target: string) => {
       fs.copyFileSync(sourceFilePath, targetFilePath);
     }
   });
+};
+
+export const installingFolders = () => {
+  const appDataPath = getDataPath();
+  const packagePath = path.join(appDataPath, "package");
+  const VITE_PUBLIC = process.env.VITE_PUBLIC;
+  createFolder(path.join(appDataPath, "package"));
+  copyFolderRecursive(path.join(VITE_PUBLIC, "package"), packagePath);
 };

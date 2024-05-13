@@ -21,16 +21,13 @@ export const App: FC = () => {
   useEffect(() => {
     const fetchCurrentVersion = async () => {
       const currentVerion = window.electronAPI.getConfig("npm_package_version");
-
-      console.log(previusVersion, currentVerion);
       if (currentVerion && previusVersion !== currentVerion) {
         setCurrentVersion(currentVerion);
         for (const serverName of serverNames) {
-          console.log("Ебашим папку", serverName);
-
           window.electronAPI.removeFolderInAppDataDirectory(serverName);
         }
         window.electronAPI.removeFolderInAppDataDirectory("package");
+        window.electronAPI.installingFolders();
       }
     };
 
