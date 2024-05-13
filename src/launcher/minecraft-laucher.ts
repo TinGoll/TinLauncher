@@ -48,10 +48,9 @@ const minecraftLauncher = async (
     ...options,
   };
 
-  const isFolderCreated = createFolder(PATH);
-  if (isFolderCreated) {
-    win?.webContents.send("minecraft-debug", { isFolderCreated, opts });
-  }
+  createFolder(PATH);
+
+  win?.webContents.send("minecraft-options", opts);
 
   readFolder(path.join(VITE_PUBLIC, "package", "industrial", "forge")).then(
     (files) => win?.webContents.send("minecraft-files", files)
