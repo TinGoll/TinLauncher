@@ -30,16 +30,15 @@ const minecraftLauncher = async (
             "package",
             "industrial",
             "forge",
-            "forge-1.19.2-43.3.8-installer.jar",
+            "forge-1.19.2-43.3.8-installer.jar"
           ),
         }
       : classicOptions;
 
   const isFolderExists = isExistsFolder(PATH);
-  const clientPackage = isFolderExists
-    ? {}
-    : { clientPackage: `${PACKAGE_PATH}/${serverType}/${serverType}.zip` };
-
+  const clientPackage = isFolderExists ? {} : {};
+  //clientPackage: `${PACKAGE_PATH}/${serverType}/${serverType}.zip`
+  
   let opts: ILauncherOptions = {
     root: PATH,
     authorization: Authenticator.getAuth(nickname),
@@ -53,7 +52,7 @@ const minecraftLauncher = async (
   win?.webContents.send("minecraft-options", opts);
 
   readFolder(path.join(VITE_PUBLIC, "package", "industrial", "forge")).then(
-    (files) => win?.webContents.send("minecraft-files", {files, opts})
+    (files) => win?.webContents.send("minecraft-files", files)
   );
 
   // События

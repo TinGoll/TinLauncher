@@ -42,6 +42,7 @@ export const getClientFolderPath = (srverName: TinLauncher.ServerType) => {
 
   const DEV_PATH = path.resolve(FOLDER_NAME, srverName);
   const PROD_PATH = path.join(APP_DATA_PATH, FOLDER_NAME, srverName);
+  
   const PATH = isDevelopment ? DEV_PATH : PROD_PATH;
   return PATH;
 };
