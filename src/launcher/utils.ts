@@ -114,4 +114,5 @@ export const installingFolders = () => {
   const VITE_PUBLIC = process.env.VITE_PUBLIC;
   createFolder(path.join(appDataPath, "package"));
   copyFolderRecursive(path.join(VITE_PUBLIC, "package"), packagePath);
+  return true;
 };

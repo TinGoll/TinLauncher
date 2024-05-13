@@ -153,10 +153,10 @@ ipcMain.handle(
 ipcMain.handle("win-hidden", async () => win?.hide());
 ipcMain.handle("win-show", async () => win?.show());
 
-ipcMain.handle("installing-folders", async () => {
+ipcMain.handle("installing-folders", () => {
   return installingFolders();
 });
 
-ipcMain.handle("remove-folder", async (_, args: { folderName: string }) => {
+ipcMain.handle("remove-folder", (_, args: { folderName: string }) => {
   return removeFolderInAppDataDirectory(args.folderName);
 });

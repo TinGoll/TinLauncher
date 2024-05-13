@@ -8,6 +8,7 @@ import {
   useCurrentVersion,
 } from "./stores/version-control.store";
 import { serverNames } from "./launcher/servers";
+import { LAUNCHER_VERSION } from "./launcher/version";
 
 const darkTheme = createTheme({
   palette: {
@@ -19,20 +20,15 @@ export const App: FC = () => {
   const previusVersion = useCurrentVersion();
 
   useEffect(() => {
-    console.log("previusVersion", previusVersion);
-
     const fetchCurrentVersion = async () => {
-      const currentVerion = window.electronAPI.getConfig("npm_package_version");
-      console.log(currentVerion, previusVersion);
+      const currentVerion = LAUNCHER_VERSION;
       if (currentVerion && previusVersion !== currentVerion) {
         setCurrentVersion(currentVerion);
         for (const serverName of serverNames) {
           window.electronAPI.removeFolderInAppDataDirectory(serverName);
         }
         window.electronAPI.removeFolderInAppDataDirectory("package");
-        window.electronAPI
-          .installingFolders()
-          .then((result) => console.log("installingFolders", result));
+        window.electronAPI.installingFolders();
       }
     };
 
