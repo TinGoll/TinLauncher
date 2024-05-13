@@ -1,4 +1,4 @@
-import { serverMapper } from "../../launcher/serverMapper";
+import { serverMapper } from "../launcher/serverMapper";
 import { FC, useEffect, useState } from "react";
 import LensRoundedIcon from "@mui/icons-material/LensRounded";
 import {

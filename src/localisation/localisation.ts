@@ -111,8 +111,8 @@ const list: LocalisationList = {
     russian: "На встречу приключениям!",
   },
   LOADING_HAS_STARTED: {
-    english: "Download has started",
-    russian: "Загрузка началась",
+    english: "The download has started, it may take a few minutes",
+    russian: "Загрузка началась, это может занять несколько минут",
   },
   LEFT_A_LITTLE: {
     english: "Not for long anymore. Wait for the game to load.",

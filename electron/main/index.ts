@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import os from "node:os";
 import { update } from "./update";
-import minecraftLauncher from "../../launcher/minecraft-laucher";
-import getStatusSserver from "../../launcher/getStatusServer";
+import minecraftLauncher from "../../src/launcher/minecraft-laucher";
+import getStatusSserver from "../../src/launcher/getStatusServer";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

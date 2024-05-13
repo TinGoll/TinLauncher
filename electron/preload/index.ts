@@ -1,5 +1,5 @@
 import { ipcRenderer, contextBridge } from "electron";
-import { removeClientFolder } from "../../launcher/utils";
+import { removeClientFolder } from "../../src/launcher/utils";
 
 // --------- Предоставить некоторый API процессу рендеринга ---------
 contextBridge.exposeInMainWorld("ipcRenderer", {

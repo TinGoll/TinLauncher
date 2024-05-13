@@ -11,7 +11,7 @@ import { localisation } from "@/localisation";
 import { PiCherriesFill } from "react-icons/pi";
 import { US, RU } from "country-flag-icons/react/3x2";
 import { setLoading } from "@/stores/loading.store";
-import { serverNames } from "../../launcher/servers";
+import { serverNames } from "../launcher/servers";
 
 const Container = styled("div")`
   & .servers {

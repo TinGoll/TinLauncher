@@ -7,7 +7,7 @@ import {
   setCurrentVersion,
   useCurrentVersion,
 } from "./stores/version-control.store";
-import { serverNames } from "../launcher/servers";
+import { serverNames } from "./launcher/servers";
 
 const darkTheme = createTheme({
   palette: {
