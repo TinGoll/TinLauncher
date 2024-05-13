@@ -1,6 +1,6 @@
 {
   "name": "Tin Launcher",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist-electron/main/index.js",
   "description": "Minecraft Launcher",
   "author": "TinGol <roma.oliynyk83@gmail.com>",
