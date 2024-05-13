@@ -25,12 +25,13 @@ const minecraftLauncher = async (
     serverType === "industrial"
       ? {
           ...industrialOptions,
-          forge: `${path.join(
+          forge: path.join(
             VITE_PUBLIC,
             "package",
             "industrial",
-            "forge"
-          )}/forge-1.19.2-43.3.8-installer.jar`,
+            "forge",
+            "forge-1.19.2-43.3.8-installer.jar"
+          ),
         }
       : classicOptions;
 
