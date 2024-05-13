@@ -25,7 +25,12 @@ const minecraftLauncher = async (
     serverType === "industrial"
       ? {
           ...industrialOptions,
-          forge: `${PACKAGE_PATH}/industrial/forge/forge-1.19.2-43.3.8-installer.jar`,
+          forge: `${path.join(
+            VITE_PUBLIC,
+            "package",
+            "industrial",
+            "forge"
+          )}/forge-1.19.2-43.3.8-installer.jar`,
         }
       : classicOptions;
 
@@ -47,8 +52,8 @@ const minecraftLauncher = async (
     win?.webContents.send("minecraft-debug", { isFolderCreated, opts });
   }
 
-  readFolder(path.join(VITE_PUBLIC, "package")).then((files) =>
-    win?.webContents.send("minecraft-files", files)
+  readFolder(path.join(VITE_PUBLIC, "package", "industrial", "forge")).then(
+    (files) => win?.webContents.send("minecraft-files", files)
   );
 
   // События
