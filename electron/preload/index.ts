@@ -1,5 +1,8 @@
 import { ipcRenderer, contextBridge } from "electron";
-import { removeClientFolder } from "../../src/launcher/utils";
+import {
+  removeClientFolder,
+  removeFolderInAppDataDirectory,
+} from "../../src/launcher/utils";
 
 // --------- Предоставить некоторый API процессу рендеринга ---------
 contextBridge.exposeInMainWorld("ipcRenderer", {
@@ -38,6 +41,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
   },
   removeClientFolder: (serverName: TinLauncher.ServerType) =>
     removeClientFolder(serverName),
+  removeFolderInAppDataDirectory: (folderName: string) =>
+    removeFolderInAppDataDirectory(folderName),
 });
 
 // --------- Preload scripts loading ---------

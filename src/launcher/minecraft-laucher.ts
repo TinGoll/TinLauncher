@@ -2,8 +2,10 @@ import { BrowserWindow } from "electron";
 import MLC, { ILauncherOptions } from "minecraft-launcher-core";
 import { classicOptions, industrialOptions } from "./options";
 import {
+  copyFolderRecursive,
   createFolder,
   getClientFolderPath,
+  getDataPath,
   isExistsFolder,
   readFolder,
 } from "./utils";
@@ -36,6 +38,10 @@ const minecraftLauncher = async (
       : classicOptions;
 
   const isFolderExists = isExistsFolder(PATH);
+  const isCreated = createFolder(PATH);
+
+  // copyFolderRecursive(path.join(VITE_PUBLIC, "package"), getDataPath());
+
   const clientPackage = isFolderExists ? {} : {};
   //clientPackage: `${PACKAGE_PATH}/${serverType}/${serverType}.zip`
 
@@ -46,8 +52,6 @@ const minecraftLauncher = async (
     ...clientPackage,
     ...options,
   };
-
-  createFolder(PATH);
 
   win?.webContents.send("minecraft-options", JSON.stringify(opts));
 

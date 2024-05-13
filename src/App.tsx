@@ -16,19 +16,21 @@ const darkTheme = createTheme({
 });
 
 export const App: FC = () => {
-  
   const previusVersion = useCurrentVersion();
+
   useEffect(() => {
-    const VITE_PUBLIC = window.electronAPI.getConfig("VITE_PUBLIC");
-    console.log("VITE_PUBLIC", VITE_PUBLIC);
-    
     const fetchCurrentVersion = async () => {
       const currentVerion = window.electronAPI.getConfig("npm_package_version");
+
+      console.log(previusVersion, currentVerion);
       if (currentVerion && previusVersion !== currentVerion) {
         setCurrentVersion(currentVerion);
         for (const serverName of serverNames) {
-          window.electronAPI.removeClientFolder(serverName);
+          console.log("Ебашим папку", serverName);
+
+          window.electronAPI.removeFolderInAppDataDirectory(serverName);
         }
+        window.electronAPI.removeFolderInAppDataDirectory("package");
       }
     };
 

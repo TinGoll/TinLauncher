@@ -6,10 +6,10 @@ export const isExistsFolder = (path: string): boolean => {
   return fs.existsSync(path);
 };
 
-export const removeFolder = (path: string): boolean => {
+export const removeFolder = (folderPath: string): boolean => {
   try {
-    if (isExistsFolder(path)) {
-      fs.rmdirSync(path, { recursive: true });
+    if (isExistsFolder(folderPath)) {
+      fs.rmdirSync(folderPath, { recursive: true });
       return false;
     }
     return false;
@@ -18,10 +18,10 @@ export const removeFolder = (path: string): boolean => {
   }
 };
 
-export const createFolder = (path: string): boolean => {
+export const createFolder = (folderPath: string): boolean => {
   try {
-    if (!isExistsFolder(path)) {
-      fs.mkdirSync(path, { recursive: true });
+    if (!isExistsFolder(folderPath)) {
+      fs.mkdirSync(folderPath, { recursive: true });
       return true;
     } else {
       return false;
@@ -29,6 +29,17 @@ export const createFolder = (path: string): boolean => {
   } catch (error) {
     return false;
   }
+};
+
+export const getDataPath = () => {
+  const NODE_ENV = process.env.NODE_ENV as "development" | "production";
+  const isDevelopment = NODE_ENV === "development";
+  const APP_DATA_PATH = process.env.APPDATA || "";
+  const APP_ROOT = process.env.APP_ROOT;
+  const FOLDER_NAME = isDevelopment ? DEV_FOLDER_NAME : PROD_FOLDER_NAME;
+  const DEV_PATH = path.join(APP_ROOT, "..", FOLDER_NAME);
+  const PROD_PATH = path.join(APP_DATA_PATH, FOLDER_NAME);
+  return isDevelopment ? DEV_PATH : PROD_PATH;
 };
 
 export const getClientFolderPath = (srverName: TinLauncher.ServerType) => {
@@ -51,8 +62,16 @@ export const getClientFolderPath = (srverName: TinLauncher.ServerType) => {
 export const removeClientFolder = (
   srverName: TinLauncher.ServerType
 ): boolean => {
-  const path = getClientFolderPath(srverName);
-  return removeFolder(path);
+  const PATH = getClientFolderPath(srverName);
+  return removeFolder(PATH);
+};
+
+export const removeFolderInAppDataDirectory = (folderName: string) => {
+  const PATH = getDataPath();
+  const folderPath = path.join(PATH, folderName);
+  console.log("folderPath>>>", folderPath);
+  
+  return removeFolder(folderPath);
 };
 
 export const readFolder = (directoryPath: string) => {
@@ -64,5 +83,29 @@ export const readFolder = (directoryPath: string) => {
       }
       res(files);
     });
+  });
+};
+
+export const copyFolderRecursive = (source: string, target: string) => {
+  // Проверяем, существует ли целевая папка, если нет, создаем ее
+  if (!fs.existsSync(target)) {
+    fs.mkdirSync(target);
+  }
+
+  // Получаем список файлов в исходной папке
+  const files = fs.readdirSync(source);
+
+  // Проходимся по всем файлам и подпапкам
+  files.forEach((file) => {
+    const sourceFilePath = path.join(source, file);
+    const targetFilePath = path.join(target, file);
+
+    // Если текущий элемент является папкой, вызываем функцию рекурсивно
+    if (fs.statSync(sourceFilePath).isDirectory()) {
+      copyFolderRecursive(sourceFilePath, targetFilePath);
+    } else {
+      // Если текущий элемент является файлом, копируем его
+      fs.copyFileSync(sourceFilePath, targetFilePath);
+    }
   });
 };
