@@ -33,6 +33,7 @@ export const createFolder = (path: string): boolean => {
 
 export const getClientFolderPath = (srverName: TinLauncher.ServerType) => {
   const APP_DATA_PATH = process.env.APPDATA || "";
+  const APP_ROOT = process.env.APP_ROOT;
 
   const NODE_ENV = process.env.NODE_ENV as "development" | "production";
 
@@ -40,9 +41,9 @@ export const getClientFolderPath = (srverName: TinLauncher.ServerType) => {
 
   const FOLDER_NAME = isDevelopment ? DEV_FOLDER_NAME : PROD_FOLDER_NAME;
 
-  const DEV_PATH = path.resolve(FOLDER_NAME, srverName);
+  const DEV_PATH = path.join(APP_ROOT, "..", FOLDER_NAME, srverName);
   const PROD_PATH = path.join(APP_DATA_PATH, FOLDER_NAME, srverName);
-  
+
   const PATH = isDevelopment ? DEV_PATH : PROD_PATH;
   return PATH;
 };
