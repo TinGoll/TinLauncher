@@ -27,7 +27,9 @@ export const App: FC = () => {
           window.electronAPI.removeFolderInAppDataDirectory(serverName);
         }
         window.electronAPI.removeFolderInAppDataDirectory("package");
-        window.electronAPI.installingFolders();
+        window.electronAPI
+          .installingFolders()
+          .then((result) => console.log("installingFolders", result));
       }
     };
 

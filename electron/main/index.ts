@@ -5,7 +5,8 @@ import path from "node:path";
 import os from "node:os";
 import { update } from "./update";
 import minecraftLauncher from "../../src/launcher/minecraft-laucher";
-import getStatusSserver from "../../src/launcher/getStatusServer";
+import getStatusServer from "../../src/launcher/getStatusServer";
+import { installingFolders } from "../../src/launcher/utils";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -50,7 +51,7 @@ async function createWindow() {
     title: "Main window",
     icon: path.join(process.env.VITE_PUBLIC, "favicon.ico"),
     autoHideMenuBar: true,
-    resizable: false,
+    // resizable: false,
     width: 724,
     height: 492,
     webPreferences: {
@@ -68,7 +69,7 @@ async function createWindow() {
     // #298
     win.loadURL(VITE_DEV_SERVER_URL);
     // Open devTool if the app is not packaged
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
   } else {
     win.loadFile(indexHtml);
   }
@@ -138,7 +139,7 @@ ipcMain.handle(
   "get-server-status",
   async (_, options: TinLauncher.ServerStatusArgs) => {
     try {
-      const data = await getStatusSserver(options);
+      const data = await getStatusServer(options);
       return data;
     } catch (error) {
       return null;
@@ -148,3 +149,7 @@ ipcMain.handle(
 
 ipcMain.handle("win-hidden", async () => win?.hide());
 ipcMain.handle("win-show", async () => win?.show());
+
+ipcMain.handle("installing-folders", async () => {
+  return installingFolders();
+});

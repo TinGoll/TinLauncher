@@ -1,6 +1,5 @@
 import { ipcRenderer, contextBridge } from "electron";
 import {
-  installingFolders,
   removeClientFolder,
   removeFolderInAppDataDirectory,
 } from "../../src/launcher/utils";
@@ -44,7 +43,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
     removeClientFolder(serverName),
   removeFolderInAppDataDirectory: (folderName: string) =>
     removeFolderInAppDataDirectory(folderName),
-  installingFolders: () => installingFolders(),
+  installingFolders: () => ipcRenderer.invoke("installing-folders"),
 });
 
 // --------- Preload scripts loading ---------
