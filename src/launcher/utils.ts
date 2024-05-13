@@ -54,15 +54,13 @@ export const removeClientFolder = (
 };
 
 export const readFolder = (directoryPath: string) => {
-  fs.readdir(directoryPath, (err, files) => {
-    if (err) {
-      console.error("Ошибка чтения каталога:", err);
-      return;
-    }
-
-    console.log("Список файлов и папок в каталоге:");
-    files.forEach((file) => {
-      console.log(file);
+  return new Promise((res, rej) => {
+    fs.readdir(directoryPath, (err, files) => {
+      if (err) {
+        console.error("Ошибка чтения каталога:", err);
+        rej(err);
+      }
+      res(files);
     });
   });
 };

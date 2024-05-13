@@ -155,12 +155,17 @@ export const LoadingScreen: FC = () => {
       console.log("OPTIONS", args);
     };
 
+    const handleFiles = (_: IpcRendererEvent, ...args: [Proggress, ...any]) => {
+      console.log("FILES>>>", args);
+    };
+
     window.ipcRenderer.on("minecraft-progress", handleProgress);
     window.ipcRenderer.on("minecraft-debug", handleDebug);
     window.ipcRenderer.on("minecraft-error", handleError);
     window.ipcRenderer.on("minecraft-download-status", handleDownload);
     window.ipcRenderer.on("minecraft-package-extract", handleExtract);
     window.ipcRenderer.on("minecraft-options", handleOptions);
+    window.ipcRenderer.on("minecraft-files", handleFiles);
   }, []);
 
   return (
