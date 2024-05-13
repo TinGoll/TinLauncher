@@ -21,7 +21,7 @@ export const removeFolder = (path: string): boolean => {
 export const createFolder = (path: string): boolean => {
   try {
     if (!isExistsFolder(path)) {
-      fs.mkdirSync(path);
+      fs.mkdirSync(path, { recursive: true });
       return true;
     } else {
       return false;
