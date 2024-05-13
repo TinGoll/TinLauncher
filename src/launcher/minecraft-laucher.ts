@@ -38,7 +38,7 @@ const minecraftLauncher = async (
   const isFolderExists = isExistsFolder(PATH);
   const clientPackage = isFolderExists ? {} : {};
   //clientPackage: `${PACKAGE_PATH}/${serverType}/${serverType}.zip`
-  
+
   let opts: ILauncherOptions = {
     root: PATH,
     authorization: Authenticator.getAuth(nickname),
@@ -49,7 +49,7 @@ const minecraftLauncher = async (
 
   createFolder(PATH);
 
-  win?.webContents.send("minecraft-options", opts);
+  win?.webContents.send("minecraft-options", JSON.stringify(opts));
 
   readFolder(path.join(VITE_PUBLIC, "package", "industrial", "forge")).then(
     (files) => win?.webContents.send("minecraft-files", files)
@@ -76,7 +76,7 @@ const minecraftLauncher = async (
   launcher
     .launch(opts)
     .then(() => win?.webContents.send("minecraft-start", "start"))
-    .catch((err) => win?.webContents.send("minecraft-error", "start"));
+    .catch((err) => win?.webContents.send("minecraft-error", "error"));
 };
 
 export default minecraftLauncher;
