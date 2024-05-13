@@ -24,7 +24,6 @@ export const App: FC = () => {
       if (currentVerion && previusVersion !== currentVerion) {
         setCurrentVersion(currentVerion);
         for (const serverName of serverNames) {
-          console.log("Мочим", serverName);
           window.electronAPI.removeClientFolder(serverName);
         }
       }
@@ -36,10 +35,10 @@ export const App: FC = () => {
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     const handleStart = () => {
-      timeoutId = setTimeout(() => {
-        setLoading(false);
-        window.electronAPI.winHidden();
-      }, 30000);
+      // timeoutId = setTimeout(() => {
+      //   setLoading(false);
+      //   window.electronAPI.winHidden();
+      // }, 30000);
     };
     const handleClose = () => {
       setLoading(false);

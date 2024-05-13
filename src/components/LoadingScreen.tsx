@@ -139,6 +139,7 @@ export const LoadingScreen: FC = () => {
     };
 
     window.ipcRenderer.on("minecraft-progress", handleProgress);
+    window.ipcRenderer.on("minecraft-debug", (e) => console.log(e));
     window.ipcRenderer.on("minecraft-download-status", handleDownload);
     window.ipcRenderer.on("minecraft-package-extract", handleExtract);
   }, []);
