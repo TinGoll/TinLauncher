@@ -38,10 +38,10 @@ export const App: FC = () => {
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     const handleStart = () => {
-      // timeoutId = setTimeout(() => {
-      //   setLoading(false);
-      //   window.electronAPI.winHidden();
-      // }, 30000);
+      timeoutId = setTimeout(() => {
+        setLoading(false);
+        window.electronAPI.winHidden();
+      }, 20000);
     };
     const handleClose = () => {
       setLoading(false);
