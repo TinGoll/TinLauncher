@@ -10,7 +10,7 @@ export const industrialOptions: TOptions = {
     type: "release",
   },
   memory: {
-    max: "8G",
+    max: "6G",
     min: "4G",
   },
   quickPlay: {
@@ -30,7 +30,7 @@ export const classicOptions: TOptions = {
     type: "release",
   },
   memory: {
-    max: "8G",
+    max: "6G",
     min: "4G",
   },
   quickPlay: {

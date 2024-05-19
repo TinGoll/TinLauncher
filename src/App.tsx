@@ -19,6 +19,9 @@ const darkTheme = createTheme({
 export const App: FC = () => {
   const previusVersion = useCurrentVersion();
 
+  const env_ = window.electronAPI.getEnv();
+  console.log("ENV>>", env_);
+
   useEffect(() => {
     const fetchCurrentVersion = async () => {
       const currentVerion = LAUNCHER_VERSION;

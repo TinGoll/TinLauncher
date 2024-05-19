@@ -39,6 +39,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
   getConfig: (value: string): string | null => {
     return process?.env[value] || null;
   },
+  getEnv: () => {
+    return process?.env;
+  },
   removeClientFolder: (serverName: TinLauncher.ServerType) =>
     removeClientFolder(serverName),
   removeFolderInAppDataDirectory: (folderName: string) =>
