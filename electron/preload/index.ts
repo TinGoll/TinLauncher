@@ -43,6 +43,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
     const processEnv = { ...(process?.env || {}) };
     return processEnv;
   },
+  getJavaPath: () => ipcRenderer.invoke("java-path"),
   removeClientFolder: (serverName: TinLauncher.ServerType) =>
     removeClientFolder(serverName),
   removeFolderInAppDataDirectory: (folderName: string) =>

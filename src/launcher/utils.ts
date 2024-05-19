@@ -1,6 +1,24 @@
 import * as fs from "fs";
 import path from "path";
 import { DEV_FOLDER_NAME, PROD_FOLDER_NAME } from "./constants";
+import { execSync } from 'child_process';
+
+export function findJavaExecutable() {
+  // Проверка JAVA_HOME
+  if (process.env.JAVA_HOME) {
+      const javaPath = path.join(process.env.JAVA_HOME, 'bin', 'java');
+      return javaPath;
+  }
+
+  // Попытка найти java в PATH
+  try {
+      const javaPath = execSync('where java', { encoding: 'utf8' }).split('\r\n')[0];
+      return javaPath;
+  } catch (error) {
+      console.error('Java не найдено в PATH');
+      return null;
+  }
+}
 
 export const isExistsFolder = (path: string): boolean => {
   return fs.existsSync(path);

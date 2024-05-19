@@ -7,6 +7,7 @@ import { update } from "./update";
 import minecraftLauncher from "../../src/launcher/minecraft-laucher";
 import getStatusServer from "../../src/launcher/getStatusServer";
 import {
+  findJavaExecutable,
   installingFolders,
   removeFolderInAppDataDirectory,
 } from "../../src/launcher/utils";
@@ -159,4 +160,8 @@ ipcMain.handle("installing-folders", () => {
 
 ipcMain.handle("remove-folder", (_, args: { folderName: string }) => {
   return removeFolderInAppDataDirectory(args.folderName);
+});
+
+ipcMain.handle("java-path", () => {
+  return findJavaExecutable();
 });
