@@ -9,12 +9,16 @@ import { NoJava } from "./NoJava";
 
 export const ScreenSwitch = () => {
   const [javaPath, setJavaPath] = useState<string | null>(null);
+  const [examination, setExamination] = useState(true);
   const lang = useLanguage();
   const nickname = useCurrentNickname();
   const loading = useLoading();
 
   useEffect(() => {
-    window.electronAPI.getJavaPath().then((javaPath) => setJavaPath(javaPath));
+    window.electronAPI
+      .getJavaPath()
+      .then((javaPath) => setJavaPath(javaPath))
+      .finally(() => setExamination(false));
   }, []);
 
   if (loading) {
@@ -22,7 +26,7 @@ export const ScreenSwitch = () => {
   }
 
   if (!javaPath) {
-    return <NoJava />;
+    return <NoJava examination={examination} />;
   }
 
   if (!lang) {

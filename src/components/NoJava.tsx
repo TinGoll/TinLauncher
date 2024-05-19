@@ -1,5 +1,5 @@
-import { styled } from "@mui/material";
-import React, { FC } from "react";
+import { CircularProgress, styled } from "@mui/material";
+import { FC } from "react";
 
 const Container = styled("div")`
   display: flex;
@@ -12,7 +12,7 @@ const Container = styled("div")`
   font-size: 18px;
   gap: 8px;
   span {
-    color: red;
+    color: #ff4040;
   }
   & .text {
     padding: 26px;
@@ -21,12 +21,21 @@ const Container = styled("div")`
   }
 `;
 
-export const NoJava: FC = () => {
+type Props = {
+  examination?: boolean;
+};
+
+export const NoJava: FC<Props> = ({ examination }) => {
   return (
     <Container>
-      <div className="text">
-        <span>Java is not installed!</span> Download Java from the official site
-      </div>
+      {examination ? (
+        <CircularProgress />
+      ) : (
+        <div className="text">
+          <span>Java is not installed!</span> Download Java from the official
+          site
+        </div>
+      )}
     </Container>
   );
 };
