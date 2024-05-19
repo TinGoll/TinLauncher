@@ -12,7 +12,7 @@ interface Window {
     winShow: () => Promise<void>;
     getConfig: (value: string) => string | null;
     getEnv: <T extends object>() => Partial<T>;
-    getJavaPath: () => string;
+    getJavaPath: () => Promise<string>;
     removeClientFolder: (path: string) => boolean;
     removeFolderInAppDataDirectory: (path: string) => boolean;
     installingFolders: () => boolean;

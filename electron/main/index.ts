@@ -162,6 +162,6 @@ ipcMain.handle("remove-folder", (_, args: { folderName: string }) => {
   return removeFolderInAppDataDirectory(args.folderName);
 });
 
-ipcMain.handle("java-path", () => {
+ipcMain.handle("java-path", async () => {
   return findJavaExecutable();
 });

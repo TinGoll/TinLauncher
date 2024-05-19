@@ -3,6 +3,7 @@ import MLC, { ILauncherOptions } from "minecraft-launcher-core";
 import { classicOptions, industrialOptions } from "./options";
 import {
   createFolder,
+  findJavaExecutable,
   getClientFolderPath,
   getDataPath,
   isExistsFolder,
@@ -17,6 +18,7 @@ const minecraftLauncher = async (
   const launcher = new Client();
 
   const PATH = getClientFolderPath(serverType);
+  const JAVA_PATH = findJavaExecutable() || undefined;
 
   const PACKAGE_PATH = path.join(getDataPath(), "package");
 
@@ -43,6 +45,7 @@ const minecraftLauncher = async (
   let opts: ILauncherOptions = {
     root: PATH,
     authorization: Authenticator.getAuth(nickname),
+    javaPath: JAVA_PATH,
     ...defaultOptions,
     ...clientPackage,
     ...options,

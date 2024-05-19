@@ -18,10 +18,6 @@ const darkTheme = createTheme({
 
 export const App: FC = () => {
   const previusVersion = useCurrentVersion();
-
-  const javaPath = window.electronAPI.getJavaPath();
-  console.log("javaPath", javaPath);
-
   useEffect(() => {
     const fetchCurrentVersion = async () => {
       const currentVerion = LAUNCHER_VERSION;

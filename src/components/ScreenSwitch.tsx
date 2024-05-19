@@ -4,14 +4,25 @@ import { EnteringNickname } from "./EnteringNickname";
 import { ServerSelection } from "./ServerSelection";
 import { useLoading } from "@/stores/loading.store";
 import { LoadingScreen } from "./LoadingScreen";
+import { useEffect, useState } from "react";
+import { NoJava } from "./NoJava";
 
 export const ScreenSwitch = () => {
+  const [javaPath, setJavaPath] = useState<string | null>(null);
   const lang = useLanguage();
   const nickname = useCurrentNickname();
   const loading = useLoading();
 
+  useEffect(() => {
+    window.electronAPI.getJavaPath().then((javaPath) => setJavaPath(javaPath));
+  }, []);
+
   if (loading) {
     return <LoadingScreen />;
+  }
+
+  if (!javaPath) {
+    return <NoJava />;
   }
 
   if (!lang) {
