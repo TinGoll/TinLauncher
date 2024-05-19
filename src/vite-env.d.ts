@@ -11,7 +11,7 @@ interface Window {
     winHidden: () => Promise<void>;
     winShow: () => Promise<void>;
     getConfig: (value: string) => string | null;
-    getEnv: <T extends object>() => T | null;
+    getEnv: <T extends object>() => Partial<T>;
     removeClientFolder: (path: string) => boolean;
     removeFolderInAppDataDirectory: (path: string) => boolean;
     installingFolders: () => boolean;
