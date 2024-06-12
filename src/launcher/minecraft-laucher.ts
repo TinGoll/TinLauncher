@@ -30,7 +30,7 @@ const minecraftLauncher = async (
             PACKAGE_PATH,
             "industrial",
             "forge",
-            "forge-1.20.1-47.2.20-installer.jar"
+            "forge-1.20.1-47.3.0-installer.jar"
           ),
         }
       : classicOptions;
@@ -50,6 +50,9 @@ const minecraftLauncher = async (
     ...clientPackage,
     ...options,
   };
+
+  console.log("OPTIONS>>", opts);
+  
 
   // readFolder(path.join(VITE_PUBLIC, "package", "industrial", "forge")).then(
   //   (files) => win?.webContents.send("minecraft-files", files)

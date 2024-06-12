@@ -8,12 +8,12 @@ export const industrialOptions: TOptions = {
     number: "1.20.1",
     type: "release",
   },
-  quickPlay: {
-    type: "multiplayer",
-    identifier: servers.INDUSTRIAL_SERVER,
-  },
+  // quickPlay: {
+  //   type: "multiplayer",
+  //   identifier: servers.INDUSTRIAL_SERVER,
+  // },
   overrides: {
-    detached: false,
+    // detached: false,
   },
 };
 

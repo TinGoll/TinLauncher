@@ -109,8 +109,8 @@ export const ServerSelection: FC = () => {
       nickname: nickname,
       options: {
         memory: {
-          min,
-          max,
+          min: `${min}M`,
+          max: `${max}M`,
         },
       },
     });

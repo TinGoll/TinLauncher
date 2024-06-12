@@ -56,8 +56,8 @@ async function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, "favicon.ico"),
     autoHideMenuBar: true,
     // resizable: false,
-    width: 724,
-    height: 492,
+    width: 824,
+    height: 592,
     webPreferences: {
       preload,
       // Предупреждение: включение nodeIntegration и отключение contextIsolation небезопасно в рабочей среде
