@@ -1,1 +1,1 @@
-export const LAUNCHER_VERSION = "1.0.42";
+export const LAUNCHER_VERSION = "1.0.43";

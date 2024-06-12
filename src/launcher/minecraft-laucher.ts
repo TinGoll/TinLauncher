@@ -51,9 +51,6 @@ const minecraftLauncher = async (
     ...options,
   };
 
-  console.log("OPTIONS>>", opts);
-  
-
   // readFolder(path.join(VITE_PUBLIC, "package", "industrial", "forge")).then(
   //   (files) => win?.webContents.send("minecraft-files", files)
   // );

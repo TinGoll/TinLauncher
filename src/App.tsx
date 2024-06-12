@@ -25,8 +25,7 @@ export const App: FC = () => {
       const currentVerion = LAUNCHER_VERSION;
 
       if (currentVerion && previusVersion !== currentVerion) {
-        console.log('Удаление версии');
-        
+
         setCurrentVersion(currentVerion);
         for (const serverName of serverNames) {
           window.electronAPI.removeFolderInAppDataDirectory(serverName);
