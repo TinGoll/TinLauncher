@@ -2,6 +2,7 @@ import { Button, Tooltip, styled } from "@mui/material";
 import { FC } from "react";
 import { SeverBlock } from "./SeverBlock";
 import {
+  clearMemory,
   removeNickName,
   toggleLanguage,
   useCurrentNickname,
@@ -12,6 +13,7 @@ import { PiCherriesFill } from "react-icons/pi";
 import { US, RU } from "country-flag-icons/react/3x2";
 import { setLoading } from "@/stores/loading.store";
 import { serverNames } from "../launcher/servers";
+import MemoryIcon from "@mui/icons-material/Memory";
 
 const Container = styled("div")`
   & .servers {
@@ -54,11 +56,22 @@ const Container = styled("div")`
 
       & .language-button {
         height: 26px;
-        width: 40px;
+        width: 36px;
         svg {
           height: 26px;
         }
       }
+
+      & .memory-button {
+        height: 26px;
+        width: 26px;
+        padding: 0;
+        svg {
+          height: 26px;
+          width: 26px;
+        }
+      }
+
       & .change-nickname {
         display: flex;
         flex-direction: row;
@@ -115,10 +128,15 @@ export const ServerSelection: FC = () => {
               {CHANGE_PLAYER}
             </Button>
           </div>
-
           <Tooltip title={CHANGE_LANGUAGE}>
             <Button className="language-button" onClick={handleToggleLanguage}>
               {language === "russian" ? <US /> : <RU />}
+            </Button>
+          </Tooltip>
+
+          <Tooltip title="Изменить выделенную память">
+            <Button className="memory-button" onClick={clearMemory}>
+              <MemoryIcon />
             </Button>
           </Tooltip>
         </div>

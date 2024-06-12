@@ -1,8 +1,9 @@
 import { ipcRenderer, contextBridge } from "electron";
 import {
   removeClientFolder,
-  removeFolderInAppDataDirectory,
 } from "../../src/launcher/utils";
+
+import os from 'os';
 
 // --------- Предоставить некоторый API процессу рендеринга ---------
 contextBridge.exposeInMainWorld("ipcRenderer", {
@@ -49,6 +50,10 @@ contextBridge.exposeInMainWorld("electronAPI", {
   removeFolderInAppDataDirectory: (folderName: string) =>
     ipcRenderer.invoke("remove-folder", { folderName }),
   installingFolders: () => ipcRenderer.invoke("installing-folders"),
+  getMemoryInfo: () => ({
+    totalMemory: os.totalmem(),
+    freeMemory: os.freemem(),
+  }),
 });
 
 // --------- Preload scripts loading ---------

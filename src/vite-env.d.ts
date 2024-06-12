@@ -16,5 +16,9 @@ interface Window {
     removeClientFolder: (path: string) => boolean;
     removeFolderInAppDataDirectory: (path: string) => boolean;
     installingFolders: () => boolean;
+    getMemoryInfo: () => {
+      totalMemory: number;
+      freeMemory: number;
+    };
   };
 }

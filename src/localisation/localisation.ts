@@ -57,9 +57,9 @@ const list: LocalisationList = {
   },
   SERVER_DESCRIPTION_INDUSTRIAL: {
     english:
-      "Welcome to a technological paradise for both complete beginners and experienced researchers with the Industrial Craft, Applied Energistics and other mods",
+      "Welcome to a technological paradise for both complete beginners and experienced researchers with the Create, Applied Energistics and other mods",
     russian:
-      "Добро пожаловать в технологический рай как для совсем начинающих, так и для уже опытных исследователей с модом Industrial Craft, Applied Energistics и другими",
+      "Добро пожаловать в технологический рай как для совсем начинающих, так и для уже опытных исследователей с модом Create, Applied Energistics и другими",
   },
   SERVER_DISPLAY_INFO_PLAYING: {
     english: "Online",

@@ -4,10 +4,12 @@ import { createStore, useStore } from "zustand";
 const SETTING_LOCAL_STORAGE_KEY = "launcher-setting-storage";
 
 export type TLanguage = null | "russian" | "english";
+type TMemory = [number, number] | null;
 
 type TSettingStore = {
   language: TLanguage;
   currentNickName?: string | null;
+  memory: TMemory;
   latestNicknames: string[];
 };
 
@@ -22,6 +24,9 @@ type TSettingStoreActions = {
 
     setCurrentNickName: (nickname: string) => void;
     removeNickName: () => void;
+
+    setMemory: (min: number, max: number) => void;
+    clearMemory: () => void;
   };
 };
 
@@ -29,6 +34,7 @@ type TStore = TSettingStore & TSettingStoreActions;
 
 const initialState: TSettingStore = {
   language: null,
+  memory: null,
   currentNickName: undefined,
   latestNicknames: [],
 };
@@ -85,11 +91,16 @@ const SettingStore = createStore<TStore>()(
 
         removeNickName: () =>
           set((state) => ({ ...state, currentNickName: null })),
+        setMemory: (min: number, max: number) => set({ memory: [min, max] }),
+        clearMemory: () => set({ memory: null }),
       },
     }),
     SETTING_LOCAL_STORAGE_KEY
   )
 );
+
+export const useLauncherMemory = () =>
+  useStore(SettingStore, (state) => state.memory);
 
 export const useLatestNicknamesList = () =>
   useStore(SettingStore, (state) => state.latestNicknames);
@@ -110,4 +121,6 @@ export const {
   setLanguage,
   toggleLanguage,
   removeNickName,
+  setMemory,
+  clearMemory,
 } = SettingStore.getState().actions;

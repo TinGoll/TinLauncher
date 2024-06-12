@@ -10,6 +10,7 @@ import {
 import { serverNames } from "./launcher/servers";
 import { LAUNCHER_VERSION } from "./launcher/version";
 
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -18,6 +19,7 @@ const darkTheme = createTheme({
 
 export const App: FC = () => {
   const previusVersion = useCurrentVersion();
+
   useEffect(() => {
     const fetchCurrentVersion = async () => {
       const currentVerion = LAUNCHER_VERSION;
