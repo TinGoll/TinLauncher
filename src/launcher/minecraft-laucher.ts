@@ -12,7 +12,7 @@ import path from "path";
 
 const minecraftLauncher = async (
   win: BrowserWindow | null,
-  { nickname, serverType, options = {} }: TinLauncher.LaucherArgs
+  { nickname, serverType, options }: TinLauncher.LaucherArgs
 ): Promise<void> => {
   const { Client, Authenticator } = MLC;
   const launcher = new Client();
@@ -30,7 +30,7 @@ const minecraftLauncher = async (
             PACKAGE_PATH,
             "industrial",
             "forge",
-            "forge-1.19.2-43.3.8-installer.jar"
+            "forge-1.20.1-47.2.20-installer.jar"
           ),
         }
       : classicOptions;

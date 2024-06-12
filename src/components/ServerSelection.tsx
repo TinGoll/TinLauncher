@@ -7,6 +7,7 @@ import {
   toggleLanguage,
   useCurrentNickname,
   useLanguage,
+  useLauncherMemory,
 } from "@/stores/setting.store";
 import { localisation } from "@/localisation";
 import { PiCherriesFill } from "react-icons/pi";
@@ -89,6 +90,7 @@ const Container = styled("div")`
 export const ServerSelection: FC = () => {
   const language = useLanguage();
   const nickname = useCurrentNickname();
+  const memory = useLauncherMemory();
   const { TIN_LAUNCHER, CHANGE_LANGUAGE, PLAYER_NOW_PLAYING, CHANGE_PLAYER } =
     localisation(language);
   const handleToggleLanguage = () => toggleLanguage();
@@ -99,10 +101,18 @@ export const ServerSelection: FC = () => {
       return;
     }
     setLoading(true);
+
+    const [min, max] = memory || [2024, 4048];
+
     window.electronAPI.launchMinecraft({
       serverType: serverName,
       nickname: nickname,
-      options: {},
+      options: {
+        memory: {
+          min,
+          max,
+        },
+      },
     });
   };
 

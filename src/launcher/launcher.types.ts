@@ -30,10 +30,17 @@ declare module TinLauncher {
     html: string;
   }
 
+  interface LaucherPartialOptions extends Partial<ILauncherOptions> {
+    memory: {
+      max: string | number;
+      min: string | number;
+    };
+  }
+
   type LaucherArgs = {
     serverType: TinLauncher.ServerType;
     nickname: string;
-    options?: Partial<ILauncherOptions>;
+    options: LaucherPartialOptions;
   };
 
   type ServerStatusArgs = {
